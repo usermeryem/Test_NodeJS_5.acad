@@ -20,11 +20,12 @@ exports.addOrder= async (req, res)=>{
 exports.addPrdctToOrder= async(req, res)=>{
   try {
     let ord= await order.findById(req.params.id)
-    let pdrt= await product.findById(req.params.productId)  
-    ord={$push:{ProductList: req.params.productId}}
-    ord.TotalPrice+=pdrt.price*req.body.qunt
-    pdrt.quantity-=req.body.qunt
+    let prdt= await product.findById(req.params.productId)  
+    ord.ProductList.push(prdt.name)
+    ord.TotalPrice+=prdt.price*req.body.qunt
+    prdt.quantity-=req.body.qunt
     ord.save()
+    prdt.save()
     res.status(200).send('The order list was updated')    
   } catch (error) {
     res.status(500).send(error)

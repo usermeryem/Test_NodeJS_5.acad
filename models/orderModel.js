@@ -6,7 +6,7 @@ const orderSchema = new Schema({
     required: [true, 'Price is required']
   },
   ProductList: [
-    { type: Schema.Types.ObjectId, ref: 'product' }
+    { type: String}
   ],
   client: {
     type: String
@@ -17,3 +17,4 @@ const orderSchema = new Schema({
     versionKey: false
   })
 const order= mongoose.model('order', orderSchema)
+module.exports=order
